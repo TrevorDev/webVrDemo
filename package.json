@@ -1,0 +1,18 @@
+{
+  "name": "web-vr-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/electron": "^1.4.24",
+    "@types/jquery": "^2.0.33",
+    "@types/three": "0.0.24",
+    "jquery": "^3.1.1",
+    "three": "^0.81.2"
+  }
+}
