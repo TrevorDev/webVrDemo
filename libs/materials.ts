@@ -19,12 +19,27 @@ export default {
     globalUniforms.time.value += delta
     //console.log(globalUniforms.time.value)
   },
-  DEFAULT: new THREE.MeshStandardMaterial({
-					roughness: 0.7,
-					color: 0xffffff,
-					bumpScale: 0.002,
+  DEFAULT: new THREE.MeshPhongMaterial({
+					color: 0xfff6ad,
+					//metalness: 0.0
+				}),
+  LEAF: new THREE.MeshStandardMaterial({
+					color: 0x1b4917,
 					metalness: 0.2
 				}),
+  MOON: new THREE.ShaderMaterial( {
+    lights: true,
+  	uniforms: defaultUniforms,
+  	vertexShader: `
+      void main() {
+        //regular vertex shader
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+      }`,
+  	fragmentShader: `
+      void main() {
+        gl_FragColor = vec4(0.9,0.9,0.9, 1.0);
+      }`
+  }),
   BLINK: new THREE.ShaderMaterial( {
     lights: true,
   	uniforms: defaultUniforms,
@@ -75,11 +90,11 @@ export default {
       uniform float time;
       void main() {
         //somewhat random wave function
-        float wave = sin((time/1000.0)+position.y+sin(position.y+position.x+103.432*10294.0));
+        float wave = sin((time/1000.0)+position.y+sin(position.y*1000.0+position.x*1000.0+103.432*10294.0));
 
         //position and normal without projectionMatrix
     		vPositionInWorld = vec3(modelMatrix * vec4(position, 1.0));
-        vPositionInWorld.y+=wave*100.0;
+        vPositionInWorld.y+=wave*1.0;
         vNormalInWorld = normalize(vec3(modelMatrix * vec4(normal, 1.0)));
 
         // vRandNormalInWorld = normalize(vec3(modelMatrix * vec4(normal, 1.0)));

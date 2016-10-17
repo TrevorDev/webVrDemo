@@ -1,7 +1,7 @@
 import Controller from "../objects/controller"
 
 class CamMovement {
-  pos:THREE.Vector3 = new THREE.Vector3(0,0,5000)
+  pos:THREE.Vector3 = new THREE.Vector3(0,0,0)
   spd:THREE.Vector3 = new THREE.Vector3(0,0,0)
   view:THREE.Vector3 = new THREE.Vector3(0,0,-100)
   xMouseVal = 0;
@@ -20,7 +20,8 @@ class CamMovement {
     this.view.z = -Math.cos(this.xMouseVal)
     this.view.y = - this.yMouseVal
     this.view.normalize()
-    this.view.multiplyScalar(100)
+    var spd = 1
+    this.view.multiplyScalar(spd)
 
     if(this.controller.isDown("up")){
       this.pos.add(this.view)
@@ -31,13 +32,13 @@ class CamMovement {
     if(this.controller.isDown("left")){
       var mappedToYPlane = this.view.clone()
       mappedToYPlane.y = 0;
-      var side = mappedToYPlane.cross(new THREE.Vector3(0,1,0)).normalize().multiplyScalar(100)
+      var side = mappedToYPlane.cross(new THREE.Vector3(0,1,0)).normalize().multiplyScalar(spd)
       this.pos.sub(side)
     }
     if(this.controller.isDown("right")){
       var mappedToYPlane = this.view.clone()
       mappedToYPlane.y = 0;
-      var side = mappedToYPlane.cross(new THREE.Vector3(0,1,0)).normalize().multiplyScalar(100)
+      var side = mappedToYPlane.cross(new THREE.Vector3(0,1,0)).normalize().multiplyScalar(spd)
       this.pos.add(side)
     }
   }

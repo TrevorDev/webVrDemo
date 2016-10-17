@@ -11,15 +11,17 @@ class Stage {
   startRender(renderLoop){
     var render = ()=>{
       //TODO, may want to add composer
-      this.renderer.render( this.scene, this.camera );
+      this.renderer.render( this.scene, this.camera )
     }
     var last = Date.now()
+    var curTime = 0
     var animate = ()=>{
       var now = Date.now()
       var delta = now - last
       last = now
-			requestAnimationFrame( animate );
-      renderLoop(delta);
+			requestAnimationFrame( animate )
+      curTime+= delta
+      renderLoop(delta, curTime)
 			render();
     }
     animate()
@@ -28,7 +30,7 @@ class Stage {
   static create(container){
     var ret = new Stage();
     ret.camera = new THREE.PerspectiveCamera( 27, window.innerWidth / window.innerHeight, 5, 3500000 );
-  	//ret.camera.position.z = 2750;
+  	ret.camera.position.z = 100;
 
     ret.scene = new THREE.Scene();
   	ret.scene.fog = new THREE.Fog( 0x050505, 2000, 3500 );
