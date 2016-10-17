@@ -27,8 +27,8 @@ class Stage {
 
   static create(container){
     var ret = new Stage();
-    ret.camera = new THREE.PerspectiveCamera( 27, window.innerWidth / window.innerHeight, 5, 35000 );
-  	ret.camera.position.z = 2750;
+    ret.camera = new THREE.PerspectiveCamera( 27, window.innerWidth / window.innerHeight, 5, 3500000 );
+  	//ret.camera.position.z = 2750;
 
     ret.scene = new THREE.Scene();
   	ret.scene.fog = new THREE.Fog( 0x050505, 2000, 3500 );
